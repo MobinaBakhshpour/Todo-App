@@ -4,4 +4,24 @@
   --color-dark-green : #28301C;
   --color-pink : #FFC3CC;
   --color-lime-green : #D2DB76;
+
+  --font-Fredoka-Regular : 'Fredoka-Regular';
+  --font-Fredoka-Light : 'Fredoka-Light';
+  --font-Fredoka-SemiBold : 'Fredoka-SemiBold';
+}
+
+@font-face {
+  font-family: 'Fredoka-Light';
+  src: local('Fredoka Light'), url(./assets/fonts/Fredoka-Light.ttf) format('truetype');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Fredoka-Regular';
+  src: local('Fredoka'), url(./assets/fonts/Fredoka-Regular.ttf) format('truetype');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Fredoka-SemiBold';
+  src: local('Fredoka SemiBold'), url(./assets/fonts/Fredoka-SemiBold.ttf) format('truetype');
+  font-display: swap;
 }
