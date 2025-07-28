@@ -1,5 +1,6 @@
 import './App.css';
 import { HiOutlinePlusCircle } from "react-icons/hi2";
+import { CiTimer } from "react-icons/ci";
 import NoTodo from './components/NoTodo';
 import TodoItem from './components/TodoItem';
 import WindowAddTodo from './components/WindowAddTodo';
@@ -45,11 +46,25 @@ function App() {
 
         {todos.length ? (
           /* tasks */
-          <div className='h-[calc(100vh-130px)] md:h-[calc(100vh-160px)] overflow-y-auto overflow-x-clip w-4/5 md:w-2/3 bg-white/15 mx-auto my-10 px-4 md:px-10 rounded-2xl backdrop-blur-md'>
-            {todos.map((todo: any) => (
-              <TodoItem key={todo.id} id={todo.id} title={todo.title} completed={todo.completed} toggleTodo={toggleTodo} deleteTodo={deleteTodo} />
-            ))}
-          </div>
+          <>
+            <div className="w-4/5 md:w-2/3 mx-auto mt-3">
+              <div className="flex items-center justify-between w-full rounded-xl px-4 py-2 md:py-3 bg-dark-green text-pink font-Fredoka-Light">
+                <div className="text-base md:text-xl font-medium">
+                  Manage your <br className="block md:hidden" /> time well
+                </div>
+                <div className="flex items-center space-x-2">
+                  <CiTimer className='w-7 h-7 md:w-9 md:h-9' />
+                </div>
+              </div>
+            </div>
+
+
+            <div className='h-[calc(100vh-74px-88px)] md:h-[calc(100vh-104px-84px)] overflow-y-auto overflow-x-clip w-4/5 md:w-2/3 bg-white/15 mx-auto my-3 px-4 md:px-10 rounded-2xl backdrop-blur-md'>
+              {todos.map((todo: any) => (
+                <TodoItem key={todo.id} id={todo.id} title={todo.title} completed={todo.completed} toggleTodo={toggleTodo} deleteTodo={deleteTodo} />
+              ))}
+            </div>
+          </>
         ) : (
           /* no task */
           <NoTodo />
