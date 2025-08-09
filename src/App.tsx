@@ -7,6 +7,7 @@ import WindowAddTodo from './components/WindowAddTodo';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form'
 import { useTodoStore } from './store/todoStore';
+import TodoFilter from './components/TodoFilter'
 
 function App() {
 
@@ -15,7 +16,9 @@ function App() {
   const [group, setGroup] = useState('')
   const { register, handleSubmit, formState: { errors } } = useForm()
 
-  const { todos, addNewTodo, toggleTodo, deleteTodo } = useTodoStore()
+  const { todos, addNewTodo, toggleTodo, deleteTodo, selectedGroup } = useTodoStore()
+
+  const filterdTodo = selectedGroup === 'all' ? todos : todos.filter(todo => todo.group === selectedGroup)
 
   const closeAddTodoWindow = () => {
     setShowAddTodoWindow('hidden')
@@ -29,7 +32,6 @@ function App() {
   }
 
   const addNewTodoHandler = () => {
-    console.log(title, group);
     if (title.trim() && group !== '') {
       addNewTodo(title, group)
       setShowAddTodoWindow('hidden')
@@ -44,31 +46,37 @@ function App() {
     <>
       <div>
 
-        {todos.length ? (
+        {todos.length ?
           /* tasks */
-          <>
-            <div className="w-4/5 md:w-2/3 mx-auto mt-3">
-              <div className="flex items-center justify-between w-full rounded-xl px-4 py-2 md:py-3 bg-dark-green text-pink font-Fredoka-Light">
-                <div className="text-base md:text-xl font-medium">
-                  Manage your <br className="block md:hidden" /> time well
-                </div>
-                <div className="flex items-center space-x-2">
-                  <CiTimer className='w-7 h-7 md:w-9 md:h-9' />
+
+          (
+            <>
+              <div className="w-4/5 md:w-2/3 mx-auto mt-3">
+                <div className="flex items-center justify-between w-full rounded-xl px-4 py-2 md:py-3 bg-dark-green text-pink font-Fredoka-Light">
+                  <div className="text-base md:text-xl font-medium">
+                    Manage your <br className="block md:hidden" /> time well
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <CiTimer className='w-7 h-7 md:w-9 md:h-9' />
+                  </div>
                 </div>
               </div>
-            </div>
+
+              <TodoFilter />
+
+              <div className='h-[calc(100vh-74px-88px)] md:h-[calc(100vh-104px-84px)] overflow-y-auto overflow-x-clip w-4/5 md:w-2/3 bg-white/15 mx-auto my-3 px-4 md:px-10 rounded-2xl backdrop-blur-md'>
+                {filterdTodo.length ? filterdTodo.map((todo: any) => (
+                  <TodoItem key={todo.id} id={todo.id} title={todo.title} completed={todo.completed} toggleTodo={toggleTodo} deleteTodo={deleteTodo} />
+                )) : <div className='z-30 w-full h-4 text-blue-900'> تودویی در این فیلد وجود ندارد </div>}
+              </div>
+            </>
 
 
-            <div className='h-[calc(100vh-74px-88px)] md:h-[calc(100vh-104px-84px)] overflow-y-auto overflow-x-clip w-4/5 md:w-2/3 bg-white/15 mx-auto my-3 px-4 md:px-10 rounded-2xl backdrop-blur-md'>
-              {todos.map((todo: any) => (
-                <TodoItem key={todo.id} id={todo.id} title={todo.title} completed={todo.completed} toggleTodo={toggleTodo} deleteTodo={deleteTodo} />
-              ))}
-            </div>
-          </>
-        ) : (
-          /* no task */
-          <NoTodo />
-        )
+          )
+          : (
+            /* no task */
+            <NoTodo />
+          )
         }
 
         {/* add new Todo window */}
