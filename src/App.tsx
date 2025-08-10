@@ -14,7 +14,7 @@ function App() {
   const [showAddTodoWindow, setShowAddTodoWindow] = useState('hidden')
   const [title, setTitle] = useState('')
   const [group, setGroup] = useState('')
-  const { register, handleSubmit, formState: { errors } } = useForm()
+  const { register, handleSubmit, reset, formState: { errors } } = useForm()
 
   const { todos, addNewTodo, toggleTodo, deleteTodo, selectedGroup } = useTodoStore()
 
@@ -77,7 +77,7 @@ function App() {
         }
 
         {/* add new Todo window */}
-        <WindowAddTodo isShow={showAddTodoWindow} register={register} errors={errors} title={title} setTitle={setTitle} group={group} setGroup={setGroup} handleSubmit={handleSubmit} addNewTodoHandler={addNewTodoHandler} closeAddTodoWindow={closeAddTodoWindow} />
+        <WindowAddTodo isShow={showAddTodoWindow} register={register} errors={errors} title={title} setTitle={setTitle} group={group} setGroup={setGroup} handleSubmit={handleSubmit} addNewTodoHandler={addNewTodoHandler} closeAddTodoWindow={closeAddTodoWindow}  reset={reset} />
 
         {/* fotter */}
         <div className='fixed w-full h-10 md:h-20 left-0 bottom-0 bg-dark-green z-10'>
