@@ -7,7 +7,7 @@ import WindowAddTodo from './components/WindowAddTodo';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form'
 import { useTodoStore } from './store/todoStore';
-import TodoFilter from './components/TodoFilter'
+import TodoFilter from './components/todoFilter/TodoFilter'
 
 function App() {
 
@@ -38,8 +38,6 @@ function App() {
       setTitle('')
       setGroup('')
     }
-
-
   }
 
   return (
@@ -48,7 +46,6 @@ function App() {
 
         {todos.length ?
           /* tasks */
-
           (
             <>
               <div className="w-4/5 md:w-2/3 mx-auto mt-3">
@@ -67,7 +64,7 @@ function App() {
               <div className='h-[calc(100vh-74px-88px)] md:h-[calc(100vh-104px-84px)] overflow-y-auto overflow-x-clip w-4/5 md:w-2/3 bg-white/15 mx-auto my-3 px-4 md:px-10 rounded-2xl backdrop-blur-md'>
                 {filterdTodo.length ? filterdTodo.map((todo: any) => (
                   <TodoItem key={todo.id} id={todo.id} title={todo.title} completed={todo.completed} toggleTodo={toggleTodo} deleteTodo={deleteTodo} />
-                )) : <div className='z-30 w-full h-4 text-blue-900'> تودویی در این فیلد وجود ندارد </div>}
+                )) : <div className='z-30 w-full h-4 text-center pt-10 text-xl md:text-2xl text-dark-green'>{`No task in ${selectedGroup} group!`} </div>}
               </div>
             </>
 
